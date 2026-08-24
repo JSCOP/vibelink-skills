@@ -1,0 +1,4 @@
+# A published SKILL.md and the copy VibeLink bundles must stay byte-identical:
+# the desktop compares them with SHA-256, so one CRLF checkout would make every
+# installed copy read as permanently stale and be rewritten on every refresh.
+* text=auto eol=lf
