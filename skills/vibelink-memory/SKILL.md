@@ -17,6 +17,12 @@ description: >-
 
 Durable facts recorded by every agent that worked in this workspace. One shared store, one CLI.
 
+## Language
+
+This document is written in English so every agent reads one canonical text.
+Reply to the user in the language they are writing in — Korean question, Korean
+answer — and keep code, commands, paths, flags, and error strings verbatim in
+their original form.
 ## Resolve the CLI once
 
 - Inside a VibeLink terminal, use the `VIBELINK_CLI_EXE` environment variable. VibeLink exports it

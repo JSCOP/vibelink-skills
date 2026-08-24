@@ -20,6 +20,14 @@ it does nothing; a capability with no skill leaves agents guessing syntax.
 Three layers, kept separate: the daemon owns the capability, the `vibelink` CLI
 is the execution surface, the skill is the teaching.
 
+## Language
+
+Every published skill is written in English, so one canonical text serves every
+agent and the frontmatter stays greppable. Each skill also carries a short
+`## Language` section telling the agent to answer in the language the USER is
+writing in, keeping code, commands, paths, and error strings verbatim. Do not
+translate a skill document; do not omit that section.
+
 ## Prove it before you ship it
 
 **A skill nobody watched fail is a skill you cannot claim works.** The whole
@@ -46,6 +54,25 @@ two skills' authoring hides which text caused which behavior change. Desktop
 registration for several finished skills MAY be one batched change, because it
 changes no skill semantics.
 
+## Name it, and decide whether it ships
+
+**Anything registered in the VibeLink desktop app MUST be named `vibelink-<topic>`.**
+The name is the directory, the frontmatter `name:`, the `--skill` argument, and
+the key users see in the generated install command — one prefix keeps VibeLink's
+skills identifiable in an agent home shared by many publishers. A skill that is
+published but never bundled MAY use any name, but prefer the prefix anyway.
+
+Then decide the audience, because it decides the bundle:
+
+| Audience | Publish to the repository | Bundle in the app |
+|---|---|---|
+| Everyone using VibeLink | yes | yes |
+| Only people developing VibeLink itself | yes | **no** |
+
+The app's Settings list is what every end user sees. A skill only a VibeLink
+contributor would ever run — this one, for instance — belongs in the repository
+so it can be installed deliberately, and NOT in `BUNDLED_SKILLS`, where it would
+be permanent noise in a product surface.
 ## Write the document
 
 Keep it short enough that an agent reads all of it. Aim for what a reader needs
@@ -213,3 +240,6 @@ convenience.
 - a bundled copy whose SHA-256 differs from the published one
 - reporting a new skill as available without saying a rebuild is required
 - a test asserting a skill count instead of iterating the bundle
+- a bundled skill whose name does not start with `vibelink-`
+- bundling a contributor-only skill into the product's Settings list
+- a skill document written in anything but English, or missing its `## Language` section

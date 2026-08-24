@@ -1,5 +1,5 @@
 ---
-name: worktree-first-development
+name: vibelink-worktree-workflow
 description: >-
   Use when a task is about to change files tracked by Git, before the first
   edit, and when finished work has to reach the base branch. Especially when
@@ -23,6 +23,12 @@ worktree's own index, and nothing else. Whoever saves a file last wins, and
 whoever runs `git add -A` sweeps the other's edits into their commit. A linked
 worktree costs one command and removes that entire class of failure.
 
+## Language
+
+This document is written in English so every agent reads one canonical text.
+Reply to the user in the language they are writing in — Korean question, Korean
+answer — and keep code, commands, paths, flags, and error strings verbatim in
+their original form.
 ## The rule
 
 **Before the first change to a Git-tracked file, be in a linked worktree that

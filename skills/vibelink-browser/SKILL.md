@@ -17,6 +17,12 @@ description: >-
 One command surface over two backends. Nothing here needs a headless browser or
 a scraping library.
 
+## Language
+
+This document is written in English so every agent reads one canonical text.
+Reply to the user in the language they are writing in — Korean question, Korean
+answer — and keep code, commands, paths, flags, and error strings verbatim in
+their original form.
 ## Resolve the CLI once
 
 **`vibelink` is not on PATH. A bare `vibelink ...` fails with
