@@ -32,7 +32,8 @@ makes sense with every sentence deleted but the visuals kept, it is working. If
 it only makes sense by reading, it is an article, not an explainer.
 
 Build one standalone HTML file: inline CSS, inline SVG, no network requests, no
-build step, no framework. It must open correctly from a `file://` path.
+build step, no framework, no `<script>`. It must open from a `file://` path
+inside a nested VibeLink pane about 360px wide.
 
 ## Write it
 
@@ -53,11 +54,30 @@ build step, no framework. It must open correctly from a `file://` path.
    picture's labels back to the actual jargon, so the explainer becomes a bridge
    to real material instead of a dead end.
 
+## Page layout
+
+The page is a document, not a full-window stage. A VibeLink pane hosts a small
+nested WebView behind a native HWND overlay; a locked viewport is what makes
+that surface look broken.
+
+```css
+html, body { margin: 0; }
+body { box-sizing: border-box; padding: 16px; max-width: 52rem; }
+*, *::before, *::after { box-sizing: inherit; }
+svg, img { max-width: 100%; height: auto; }
+```
+
+Normal document flow. The page scrolls. Never `html, body { height: 100vh;
+overflow: hidden }`, never `100vw`, never `position: fixed` or `sticky`, never
+`zoom` or `transform` on `html`/`body`. Never a script, and never anything that
+touches `parent`, `top`, or `opener`.
+
 ## Deliver it
 
-Write the file, then say what you drew and how to open it. Inside a VibeLink
-workspace, save it under the workspace folder and open it in a browser content
-tab so the user sees it immediately rather than hunting for a path.
+Write the file under the workspace folder (or the current directory if there is
+no workspace). Reply with what you drew and the absolute path. Then stop.
+
+Do not open the file. The user opens the path if they want it on screen.
 
 Keep the visual honest: correct beats charming. A cute diagram that implies the
 wrong mental model is worse than a plain one that is right.
@@ -72,3 +92,13 @@ wrong mental model is worse than a plain one that is right.
 | "Emoji are basically pictures" | They are text. Draw the structure with SVG or layout. |
 | "Markdown reply is faster than an HTML file" | The artifact is the deliverable. A chat reply is not one. |
 | "Simplifying means I can be loose about the facts" | Simple and wrong is the one unacceptable outcome. Cut scope, never accuracy. |
+| "I'll open a VibeLink tab so they see it immediately" | Opening it inside VibeLink creates a native WebView2 overlay and wrecks the workspace. Write the absolute path. The user opens it. |
+| "new-tab / harness browser.open / CDP Chrome is that content tab" | `vibelink browser new-tab` and the harness browser tool open Chrome, not a VibeLink content tab. The CLI cannot create in-pane pages. Out of scope. |
+| "A 100vh full-bleed page looks more like a real explainer" | It clips and overflows in a nested pane. Document flow is the explainer. |
+
+## Red flags
+
+- about to click around VibeLink, spawn Chrome, call `vibelink browser`, or use
+  the harness browser tool
+- `100vh`, `100vw`, `position: fixed`, or a `<script>` in the page
+- pasting the HTML into the chat reply
