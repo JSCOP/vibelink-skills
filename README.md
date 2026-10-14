@@ -14,7 +14,6 @@ instructs the agent to reply in whatever language the user writes in.
 
 | Skill | What it gives an agent | Needs VibeLink | In the app |
 | --- | --- | --- | --- |
-| `vibelink-memory` | Read and record the durable project facts VibeLink keeps for a workspace, through the `vibelink memory` CLI. One shared store, every agent. | yes | yes |
 | `vibelink-browser` | Drive a real browser through the `vibelink browser` CLI — the user's own signed-in Chrome, or a VibeLink in-pane page. | yes | yes |
 | `vibelink-worktree-workflow` | Work in a Git worktree of its own instead of the shared checkout, hand off a commit, and integrate one branch at a time. | no | yes |
 | `vibelink-eli5` | Explain a topic from zero as a self-contained HTML page: big pictures, very few words. | no | yes |
